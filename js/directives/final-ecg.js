@@ -2,42 +2,55 @@
 
 angular
 .module('ecg.controllers')
-.directive('finalEcg', function(Reader) {
-  function drawHandler($scope, offset) {
-    this.clearRect($scope.offset, 0, 11, $scope.height);
+.directive('finalEcg', function(Settings, ResultWaveAccessor) {
+  function getNextPoint($scope, xStep) {
+    var x = $scope.last.x + xStep,
+        y = ResultWaveAccessor($scope.last.offset);
 
-    this.beginPath();
-    this.moveTo($scope.offset, $scope.lastValue);
+    return {
+      offset: $scope.last.offset + 1,
+      x: x,
+      y: $scope.width / 2 - y * $scope.width / 2
+    }
+  }
 
-    $scope.offset += 0.2;
-    if($scope.offset >= $scope.width) {
-      $scope.offset = 0;
-      this.moveTo($scope.offset, $scope.lastValue);
+  function drawHandler($scope) {
+    var xStep = Settings.paperSpeed * (60 / Settings.heartRate) / Settings.lod;
+    var pt = getNextPoint($scope, xStep);
+
+    if(pt.x >= $scope.width) {
+      $scope.last.x = 0;
     }
 
-    $scope.lastValue = $scope.height / 2 * (2 - Reader.getLeadByIndex($scope.lead));
-    this.lineTo($scope.offset, $scope.lastValue);
+    this.beginPath();
+    this.moveTo($scope.last.x, $scope.last.y);
+    this.lineTo(pt.x, pt.y);
     this.stroke();
+
+    $scope.last = pt;
   }
 
   return {
     restrict: 'E',
-    template: '<canvas width={{width}} height={{height}}>',
+    template: '<canvas width={{width}} height={{height}}></canvas>',
 
     scope: { lead: '=' },
 
     link: function($scope, element) {
-      $scope.width = 500;
+      $scope.width  = 500;
       $scope.height = 150;
       var ctx = element.find('canvas')[0].getContext('2d');
 
-      $scope.offset = 0;
-      $scope.lastValue = 0;
+      $scope.last = {
+        offset: 0,
+        x: 0,
+        y: 0
+      };
 
       window.requestAnimationFrame(function handler() {
         drawHandler.call(ctx, $scope);
         window.requestAnimationFrame(handler);
-      })
+      });
     }
   };
 });
