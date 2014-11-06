@@ -1,0 +1,32 @@
+<html ng-app="ecg">
+<head>
+  <title>Electrocardiography</title>
+
+  <script src="lib/angular.js"></script>
+  <script src="lib/BSpline.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/request-animation-frame.js"></script>
+  <script src="js/controllers/main.js"></script>
+  <script src="js/directives/input-ecg.js"></script>
+  <script src="js/directives/final-ecg.js"></script>
+  <script src="js/services/cardio.js"></script>
+  <script src="js/services/electrodes.js"></script>
+  <script src="js/services/reader.js"></script>
+
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <input-ecg></input-ecg>
+
+  <div>
+    <final-ecg lead="0"></final-ecg>
+  </div>
+  <div>
+    <final-ecg lead="1"></final-ecg>
+  </div>
+  <div>
+    <final-ecg lead="2"></final-ecg>
+  </div>
+</body>
+</html>
