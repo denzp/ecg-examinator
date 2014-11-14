@@ -10,16 +10,17 @@ angular
     return {
       offset: $scope.last.offset + 1,
       x: x,
-      y: $scope.width / 2 - y * $scope.width / 2
+      y: $scope.height / 2 - y * $scope.height / 2
     }
   }
 
   function drawHandler($scope) {
-    var xStep = Settings.paperSpeed * (60 / Settings.heartRate) / Settings.lod;
+    var xStep = Settings.paperSpeed * (90 / Settings.heartRate) / Settings.lod;
     var pt = getNextPoint($scope, xStep);
 
     if(pt.x >= $scope.width) {
-      $scope.last.x = 0;
+      $scope.last.x = -1;
+      pt.x = 0;
     }
 
     this.beginPath();
