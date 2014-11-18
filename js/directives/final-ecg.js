@@ -2,10 +2,10 @@
 
 angular
 .module('ecg.controllers')
-.directive('finalEcg', function(Settings, ResultWaveAccessor) {
+.directive('finalEcg', function(Settings, ResultWave) {
   function getNextPoint($scope, xStep) {
     var x = $scope.last.x + xStep,
-        y = ResultWaveAccessor($scope.last.offset);
+        y = ResultWave($scope.last.offset);
 
     return {
       offset: $scope.last.offset + 1,

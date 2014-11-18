@@ -6,7 +6,7 @@ angular
   heartRate: 60,
   paperSpeed: 50 * 1,
 
-  // size of one heartbeet interval
+  // level of details per one heartbeet
   lod: 400
 })
 

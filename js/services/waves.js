@@ -126,7 +126,7 @@ angular
   }
 })
 
-.factory('ResultWave', function(Settings, PWave, QRSWave, QWave, SWave, TWave, UWave) {
+.factory('Composer', function(Settings, PWave, QRSWave, QWave, SWave, TWave, UWave) {
   return function(preset) {
     var components = [
       PWave,
@@ -134,7 +134,7 @@ angular
       QWave,
       SWave,
       TWave,
-      UWave
+      //UWave
     ];
 
     var li = 30 / Settings.heartRate;
@@ -153,13 +153,5 @@ angular
     }
 
     return result;
-  };
-})
-
-.factory('ResultWaveAccessor', function(ResultWave) {
-  var result = ResultWave('normal');
-
-  return function(offset) {
-    return result[offset % result.length];
   };
 });
