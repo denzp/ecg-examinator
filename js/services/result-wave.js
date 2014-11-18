@@ -7,7 +7,7 @@ angular
   var accumulator = [],
       mean        = 0;
 
-  while(accumulator.length < Settings.lod / 10) {
+  while(accumulator.length < Math.ceil(Math.log(Settings.lod) * 5)) {
     accumulator.push(Math.random());
   }
 
@@ -29,19 +29,25 @@ angular
   };
 })
 
-.provider('ResultWave', function() {
-  this.noiseStrength = 0.25;
+.factory('WaveStorage', function(Composer) {
+  var storage = { };
 
-  this.$get = function ResultWave(Noise, Composer) {
-    var result = Composer('normal');
+  return function(preset) {
+    if(storage[preset]) {
+      return storage[preset];
+    }
 
-    return function(offset) {
-      var waveAmplitude = result[offset % result.length];
+    return storage[preset] = Composer(preset);
+  };
+})
 
-      // add noise
-      waveAmplitude += this.noiseStrength * Noise();
+.factory('ResultWave', function(Settings, WaveStorage, Noise) {
+  return function(offset, preset, noise) {
+    var waveAmplitude = WaveStorage(preset)[offset % Settings.lod];
 
-      return waveAmplitude;
-    }.bind(this);
+    // add noise
+    waveAmplitude += 2 * noise * (Noise() - 0.5);
+
+    return waveAmplitude;
   };
 });

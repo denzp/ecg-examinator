@@ -1,13 +1,20 @@
-var animationFrameWaiters = [];
-var refreshInterval = setInterval(function() {
-  var lastWaiters = animationFrameWaiters;
-  animationFrameWaiters = [];
+(function() {
+  window.originalRequestAnimationFrame = window.requestAnimationFrame;
+  window.requestAnimationFrame = function(callback) {
+    animationFrameWaiters.push(callback);
+  };
 
-  lastWaiters.forEach(function(func) {
-    func();
+  var animationFrameWaiters = [];
+  window.originalRequestAnimationFrame(function handler() {
+    var lastWaiters = animationFrameWaiters;
+    animationFrameWaiters = [];
+
+    lastWaiters.forEach(function(func) {
+      func();
+    });
+
+    window.originalRequestAnimationFrame(handler);
   });
-}, 0);
 
-window.requestAnimationFrame = function(callback) {
-  animationFrameWaiters.push(callback);
-};
+
+})();

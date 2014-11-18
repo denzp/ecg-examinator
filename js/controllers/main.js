@@ -2,6 +2,5 @@
 
 angular
 .module('ecg.controllers')
-.controller('MainController', function() {
-
+.controller('MainController', function($scope) {
 });

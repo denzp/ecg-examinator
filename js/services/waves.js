@@ -26,7 +26,7 @@ angular
 .factory('QRSWave', function(Settings, Presets) {
   return function(preset, x, li) {
     var b   = (2 * li) / Presets[preset].qrs.duration;
-    var QRS = Presets[preset].qrs.amplitude / (2 * b) * (2 - b);
+    var QRS = Presets[preset].qrs.amplitude / ((2 * b) * (2 - b));
 
     for(var i = 1; i < ITERATIONS; ++i) {
       var t1 = 2 * b * Presets[preset].qrs.amplitude;
@@ -141,7 +141,7 @@ angular
 
     var result = new Array(Settings.lod);
     for(var i = 0; i < result.length; ++i) {
-      result[i] = 0;
+      result[i] = -0.038; // magic!
     }
 
     for(var offset = 0; offset < result.length; ++offset) {

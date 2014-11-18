@@ -9,7 +9,7 @@
   <script src="js/request-animation-frame.js"></script>
   <script src="js/controllers/main.js"></script>
   <script src="js/directives/input-ecg.js"></script>
-  <script src="js/directives/final-ecg.js"></script>
+  <script src="js/directives/ecg-simulator.js"></script>
   <script src="js/services/cardio.js"></script>
   <script src="js/services/electrodes.js"></script>
   <script src="js/services/settings.js"></script>
@@ -18,17 +18,17 @@
 
   <link rel="stylesheet" href="css/app.css" />
 </head>
-<body>
+<body ng-controller="MainController">
   <input-ecg></input-ecg>
 
   <div>
-    <final-ecg lead="0"></final-ecg>
+    <ecg-simulator></ecg-simulator>
   </div>
   <div>
-    <final-ecg lead="1"></final-ecg>
+    <ecg-simulator noise="0.2"></ecg-simulator>
   </div>
   <div>
-    <final-ecg lead="2"></final-ecg>
+    <ecg-simulator noise="0.5"></ecg-simulator>
   </div>
 </body>
 </html>

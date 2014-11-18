@@ -3,11 +3,12 @@
 angular
 .module('ecg.services')
 .value('Settings', {
-  heartRate: 60,
-  paperSpeed: 50 * 1,
+  heartRate: 60, // beats per minute
+  ppm: 5, // pixels per mm
+  paperSpeed: 30, // mm per second
 
   // level of details per one heartbeet
-  lod: 400
+  lod: 100
 })
 
 .factory('Presets', function() {
