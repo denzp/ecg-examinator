@@ -124,6 +124,10 @@ angular
           implementations = angular.element(elem[0].querySelectorAll('.implementation')),
           header          = elem.find('header');
 
+      header.on('click', function() {
+        elem.toggleClass('hidden');
+      });
+
       setTimeout(function() {
         if(attrs.type === 'comparsion') {
           return assertComparsion(reference, implementations, header);

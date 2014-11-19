@@ -8,6 +8,7 @@
 }
 header {
   font-size: 22pt;
+  cursor: pointer;
 }
 header > small {
   display: block;
@@ -41,4 +42,9 @@ header.partial {
 }
 .reference:last-child, .implementation:last-child {
   border-bottom-width: 0px;
+}
+
+.test-case.hidden .reference,
+.test-case.hidden .implementation {
+  display: none;
 }
