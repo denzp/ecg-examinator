@@ -1,6 +1,6 @@
 <html ng-app="ecg">
 <head>
-  <title>Electrocardiography</title>
+  <title>ЕКГ</title>
 
   <script src="lib/jquery-2.1.1.js"></script>
   <script src="lib/bootstrap.js"></script>
@@ -41,13 +41,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Відкрити навігацію</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">ECG Examinator</a>
+          <a class="navbar-brand" href="javascript:void()">Електрокардіограма</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -68,8 +62,16 @@
       </div>
     </nav>
 
-    <div class="container main-container">
-      <center ng-if="questNum <= questCount">
+    <div class="container main-container" ng-if="questNum <= questCount">
+      <h5>
+        Питання <strong ng-bind="questNum"></strong>
+        з <strong ng-bind="questCount"></strong>
+      </h5>
+      <h3>
+        Яка хвороба відповідає даній кардіограмі?
+      </h3>
+
+      <center>
         <ecg-simulator preset="question.type" noise="question.noise">
         </ecg-simulator>
       </center>
@@ -77,11 +79,6 @@
       <hr />
 
       <div ng-if="questNum <= questCount">
-
-        <h3>
-          Питання №<strong ng-bind="questNum"></strong> з <strong ng-bind="questCount"></strong>:
-        </h3>
-
         <ul class="list-group answers-list">
           <li class="list-group-item" ng-repeat="answer in question.answers"
               ng-class="{active: answer.id == question.choice}"
@@ -100,18 +97,14 @@
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           </span>
         </button>
-
       </div>
+    </div>
 
-      <div ng-if="questNum > questCount">
-        <div class="alert alert-info font-25" role="alert">
-          Ваш результат:
-          <span class="text-success font-45" ng-bind="correct"></span>
-          /
-          <span class="text-warning" ng-bind="questCount"></span>
-        </div>
-      </div>
-
+    <div class="container main-container result-page" ng-if="questNum > questCount">
+      <header>Ваш результат</header>
+      <content>
+        {{correct}}<small> / {{questCount}}</small>
+      </content>
     </div>
 
   </div>

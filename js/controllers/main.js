@@ -4,7 +4,7 @@ angular
 .module('ecg.controllers')
 .controller('MainController', function($scope, Authentication, Questions) {
 
-  $scope.authenticated = true;Authentication.authenticated;
+  $scope.authenticated = Authentication.authenticated;
   $scope.user = { };
 
   $scope.signIn = function() {
@@ -24,7 +24,7 @@ angular
 
   $scope.getNextQuestion = function() {
     $scope.$broadcast('reset-ecg-simulation');
-    
+
     if($scope.question && $scope.question.answers[$scope.question.choice].correct) {
       $scope.correct++;
     }

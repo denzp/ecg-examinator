@@ -115,6 +115,27 @@ angular
     $scope.last = point;
   }
 
+  function initialDraw($scope, ctx) {
+    ctx.clearRect(0, 0, $scope.width, $scope.height);
+    
+    if($scope.grid) {
+      drawGrid.call(ctx, 0, $scope.width, $scope.height);
+    }
+
+    // draw 1V helper
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgb(0, 0, 0)';
+    ctx.beginPath();
+    ctx.moveTo(5,  translateY($scope.height, 0));
+    ctx.lineTo(10, translateY($scope.height, 0));
+    ctx.lineTo(10, translateY($scope.height, 1));
+    ctx.lineTo(30, translateY($scope.height, 1));
+    ctx.lineTo(30, translateY($scope.height, 0));
+    ctx.lineTo(35, translateY($scope.height, 0));
+    ctx.stroke();
+    ctx.lineWidth = 1;
+  }
+
   return {
     restrict: 'E',
     template: '<canvas width="{{width}}" height="{{height}}"></canvas>',
@@ -148,26 +169,13 @@ angular
           x: margin.left,
           y: translateY($scope.height, ResultWave(0, $scope.preset || 'normal', $scope.noise))
         };
+
+        initialDraw($scope, ctx);
       });
 
       // should run on after canvas had been set
       setTimeout(function() {
-        if($scope.grid) {
-          drawGrid.call(ctx, 0, $scope.width, $scope.height);
-        }
-
-        // draw 1V helper
-        ctx.lineWidth = 1.5;
-        ctx.strokeStyle = 'rgb(0, 0, 0)';
-        ctx.beginPath();
-        ctx.moveTo(5,  translateY($scope.height, 0));
-        ctx.lineTo(10, translateY($scope.height, 0));
-        ctx.lineTo(10, translateY($scope.height, 1));
-        ctx.lineTo(30, translateY($scope.height, 1));
-        ctx.lineTo(30, translateY($scope.height, 0));
-        ctx.lineTo(35, translateY($scope.height, 0));
-        ctx.stroke();
-        ctx.lineWidth = 1;
+        initialDraw($scope, ctx);
 
         window.requestAnimationFrame(function handler() {
           drawHandler.call(ctx, $scope);
