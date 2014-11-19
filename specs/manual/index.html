@@ -26,7 +26,7 @@
 <body ng-controller="ManualTestsController">
   <div class="test-case" type="match">
     <header>
-      it should <strong>be indifferent from reference</strong> without grid and noise
+      ECG should <strong>be indifferent from reference</strong> without grid and noise
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
@@ -41,7 +41,7 @@
 
   <div class="test-case" type="not-match">
     <header>
-      it should <strong>be different from reference</strong> with noise and without grid
+      ECG should <strong>be different from reference</strong> with noise and without grid
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
@@ -56,7 +56,7 @@
 
   <div class="test-case" type="match">
     <header>
-      it should <strong>be indifferent from reference with grid</strong> and without noise
+      ECG should <strong>be indifferent from reference with grid</strong> and without noise
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
@@ -71,7 +71,7 @@
 
   <div class="test-case" type="comparsion">
     <header>
-      it should <strong>be more different from reference as more the noise level is bigger</strong>
+      ECG should <strong>be more different from reference as more the noise level is bigger</strong>
       <small>pixel-to-pixel comparsions against image</small>
     </header>
 
@@ -89,6 +89,23 @@
 
     <div class="implementation">
       <ecg-simulator width="500" height="150" noise="0.5"  static></ecg-simulator>
+    </div>
+  </div>
+
+  <div class="test-case" type="not-match">
+    <header>
+      Idioventricular Rhythm should <strong>be different from normal ECG</strong>
+      <small>pixel-to-pixel comparsion against image</small>
+    </header>
+
+    <div class="reference">
+      <img src="specs/manual/reference/normal-nogrid.png">
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150"
+                     preset="idioventricularRhythm" static no-grid>
+      </ecg-simulator>
     </div>
   </div>
 </body>

@@ -70,6 +70,9 @@ angular
     if(result < 2) {
       header.addClass('success');
     }
+    else {
+      header.addClass('fail');
+    }
   }
 
   function assertNotMatch(reference, implementation, header) {
@@ -78,6 +81,9 @@ angular
 
     if(result > 20) {
       header.addClass('success');
+    }
+    else {
+      header.addClass('fail');
     }
   }
 

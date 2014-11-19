@@ -2,7 +2,7 @@
 
 angular
 .module('ecg.controllers')
-.directive('ecgSimulator', function(Settings, ResultWave) {
+.directive('ecgSimulator', function(Presets, Settings, ResultWave) {
   var margin = {
     left: 45,
     right: 10,
@@ -77,7 +77,7 @@ angular
 
   function drawHandler($scope) {
     var pixelsPerSecond    = Settings.paperSpeed * Settings.ppm,
-        pixelsPerHeartBeet = Settings.heartRate / 60 * pixelsPerSecond,
+        pixelsPerHeartBeet = Presets[$scope.preset].beats / 60 * pixelsPerSecond,
         stepX = Math.ceil(pixelsPerHeartBeet / Settings.lod),
         cleanWidth = stepX * 2 + 75;
 

@@ -126,18 +126,18 @@ angular
   }
 })
 
-.factory('Composer', function(Settings, PWave, QRSWave, QWave, SWave, TWave, UWave) {
+.factory('Composer', function(Presets, Settings, PWave, QRSWave, QWave, SWave, TWave, UWave) {
   return function(preset) {
-    var components = [
-      PWave,
-      QRSWave,
-      QWave,
-      SWave,
-      TWave,
-      //UWave
-    ];
+    var components = [];
 
-    var li = 30 / Settings.heartRate;
+    if(Presets[preset].p.visible)   { components.push(PWave); }
+    if(Presets[preset].qrs.visible) { components.push(QRSWave); }
+    if(Presets[preset].q.visible)   { components.push(QWave); }
+    if(Presets[preset].s.visible)   { components.push(SWave); }
+    if(Presets[preset].t.visible)   { components.push(TWave); }
+    if(Presets[preset].u.visible)   { components.push(UWave); }
+
+    var li = 30 / Presets[preset].beats;
 
     var result = new Array(Settings.lod);
     for(var i = 0; i < result.length; ++i) {
