@@ -11,40 +11,40 @@ angular
       type: 'normal',
       noise: 0.0,
       answers: [
-        { text: 'нормальна екг', correct: true },
-        { text: 'ідіовентрикулярний ритм', correct: false },
-        { text: 'TODO', correct: false },
-        { text: 'TODO', correct: false },
+        { id: 0, text: 'нормальна екг', correct: true },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'TODO', correct: false },
+        { id: 3, text: 'TODO', correct: false },
       ]
     },
     {
       type: 'normal',
       noise: 0.5,
       answers: [
-        { text: 'нормальна екг', correct: true },
-        { text: 'ідіовентрикулярний ритм', correct: false },
-        { text: 'TODO', correct: false },
-        { text: 'TODO', correct: false },
+        { id: 0, text: 'нормальна екг', correct: true },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'TODO', correct: false },
+        { id: 3, text: 'TODO', correct: false },
       ]
     },
     {
       type: 'idioventricularRhythm',
       noise: 0.0,
       answers: [
-        { text: 'нормальна екг', correct: false },
-        { text: 'ідіовентрикулярний ритм', correct: true },
-        { text: 'TODO', correct: false },
-        { text: 'TODO', correct: false },
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: true },
+        { id: 2, text: 'TODO', correct: false },
+        { id: 3, text: 'TODO', correct: false },
       ]
     },
     {
       type: 'idioventricularRhythm',
       noise: 0.5,
       answers: [
-        { text: 'нормальна екг', correct: false },
-        { text: 'ідіовентрикулярний ритм', correct: true },
-        { text: 'TODO', correct: false },
-        { text: 'TODO', correct: false },
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: true },
+        { id: 2, text: 'TODO', correct: false },
+        { id: 3, text: 'TODO', correct: false },
       ]
     },
   ];
@@ -59,7 +59,7 @@ angular
       array[j] = temp;
     }
 
-    return array();
+    return array;
   }
 
   return function getQuestions(count) {
