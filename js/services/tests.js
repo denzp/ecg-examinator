@@ -9,10 +9,10 @@ angular
   var questions = [
     {
       type: 'normal',
-      noise: 0,
+      noise: 0.0,
       answers: [
         { text: 'нормальна екг', correct: true },
-        { text: 'TODO', correct: false },
+        { text: 'ідіовентрикулярний ритм', correct: false },
         { text: 'TODO', correct: false },
         { text: 'TODO', correct: false },
       ]
@@ -22,11 +22,31 @@ angular
       noise: 0.5,
       answers: [
         { text: 'нормальна екг', correct: true },
-        { text: 'TODO', correct: false },
+        { text: 'ідіовентрикулярний ритм', correct: false },
         { text: 'TODO', correct: false },
         { text: 'TODO', correct: false },
       ]
-    }
+    },
+    {
+      type: 'idioventricularRhythm',
+      noise: 0.0,
+      answers: [
+        { text: 'нормальна екг', correct: false },
+        { text: 'ідіовентрикулярний ритм', correct: true },
+        { text: 'TODO', correct: false },
+        { text: 'TODO', correct: false },
+      ]
+    },
+    {
+      type: 'idioventricularRhythm',
+      noise: 0.5,
+      answers: [
+        { text: 'нормальна екг', correct: false },
+        { text: 'ідіовентрикулярний ритм', correct: true },
+        { text: 'TODO', correct: false },
+        { text: 'TODO', correct: false },
+      ]
+    },
   ];
 
   function shuffle(array) {

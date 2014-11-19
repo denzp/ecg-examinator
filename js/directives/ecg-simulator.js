@@ -17,7 +17,7 @@ angular
 
   function getNextPoint($scope, stepX) {
     var x = $scope.last.x + stepX,
-        y = ResultWave($scope.last.offset, $scope.preset, $scope.noise);
+        y = ResultWave($scope.last.offset, $scope.preset || 'normal', $scope.noise);
 
     return {
       offset: $scope.last.offset + 1,
@@ -77,7 +77,7 @@ angular
 
   function drawHandler($scope) {
     var pixelsPerSecond    = Settings.paperSpeed * Settings.ppm,
-        pixelsPerHeartBeet = Presets[$scope.preset].beats / 60 * pixelsPerSecond,
+        pixelsPerHeartBeet = Presets[$scope.preset || 'normal'].beats / 60 * pixelsPerSecond,
         stepX = Math.ceil(pixelsPerHeartBeet / Settings.lod),
         cleanWidth = stepX * 2 + 75;
 
@@ -129,7 +129,6 @@ angular
     link: function($scope, element, attrs) {
       if(!$scope.width)  { $scope.width = 800; }
       if(!$scope.height) { $scope.height = Settings.ppm * 30 + margin.top + margin.bottom; }
-      if(!$scope.preset) { $scope.preset = 'normal'; }
       if($scope.noise === undefined) { $scope.noise = 0; }
 
       $scope.static = attrs.static !== undefined;
@@ -140,7 +139,7 @@ angular
       $scope.last = {
         offset: 0,
         x: margin.left,
-        y: translateY($scope.height, ResultWave(0, $scope.preset, $scope.noise))
+        y: translateY($scope.height, ResultWave(0, $scope.preset || 'normal', $scope.noise))
       };
 
       // should run on after canvas had been set

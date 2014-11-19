@@ -92,19 +92,19 @@
     </div>
   </div>
 
-  <div class="test-case" type="not-match">
+  <div class="test-case" type="match">
     <header>
-      Idioventricular Rhythm should <strong>be different from normal ECG</strong>
+      Idioventricular Rhythm should <strong>be indifferent from reference</strong>
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
     <div class="reference">
-      <img src="specs/manual/reference/normal-nogrid.png">
+      <img src="specs/manual/reference/idioventricular-nogrid.png">
     </div>
 
     <div class="implementation">
-      <ecg-simulator width="500" height="150"
-                     preset="idioventricularRhythm" static no-grid>
+      <ecg-simulator width="500" height="150" static no-grid
+                     preset="'idioventricularRhythm'">
       </ecg-simulator>
     </div>
   </div>

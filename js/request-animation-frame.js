@@ -1,4 +1,5 @@
 (function() {
+
   window.originalRequestAnimationFrame = window.requestAnimationFrame;
   window.requestAnimationFrame = function(callback) {
     animationFrameWaiters.push(callback);
@@ -15,6 +16,5 @@
 
     window.originalRequestAnimationFrame(handler);
   });
-
 
 })();
