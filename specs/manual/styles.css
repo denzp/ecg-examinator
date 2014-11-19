@@ -1,0 +1,44 @@
+.test-case {
+  margin: 5px;
+  margin-bottom: 20px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  padding: 5px;
+  box-shadow: 1px 1px 3px rgb(150, 150, 150);
+}
+header {
+  font-size: 22pt;
+}
+header > small {
+  display: block;
+  color: gray;
+}
+
+header.success {
+  color: rgb(0, 105, 0);
+}
+header.fail {
+  color: rgb(226, 0, 0);
+}
+header.partial {
+  color: rgb(189, 122, 0);
+}
+
+.reference:after {
+  content: 'reference image';
+  display: block;
+  padding-top: 3px;
+}
+.implementation > div {
+  padding-top: 3px;
+}
+
+.reference, .implementation {
+  text-align: center;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  border-bottom: 1px solid rgb(202, 202, 202);
+}
+.reference:last-child, .implementation:last-child {
+  border-bottom-width: 0px;
+}

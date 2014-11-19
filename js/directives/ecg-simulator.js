@@ -143,12 +143,13 @@ angular
         y: translateY($scope.height, ResultWave(0, $scope.preset, $scope.noise))
       };
 
-      window.requestAnimationFrame(function() {
+      // should run on after canvas had been set
+      setTimeout(function() {
         if($scope.grid) {
           drawGrid.call(ctx, 0, $scope.width, $scope.height);
         }
 
-        // draw 1v helper
+        // draw 1V helper
         ctx.lineWidth = 1.5;
         ctx.strokeStyle = 'rgb(0, 0, 0)';
         ctx.beginPath();

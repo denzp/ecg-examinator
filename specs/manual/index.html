@@ -1,4 +1,4 @@
-<html ng-app="ecg">
+<html ng-app="ecg.specs.manual">
 <head>
   <title>ECG tests</title>
 
@@ -15,17 +15,23 @@
   <script src="js/services/waves.js"></script>
   <script src="js/services/result-wave.js"></script>
 
+  <!-- test utils -->
+  <script src="specs/manual/js/app.js"></script>
+  <script src="specs/manual/js/test-case.js"></script>
+  <script src="specs/manual/js/request-animation-frame-stub.js"></script>
+
   <link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" href="specs/manual/styles.css" />
 </head>
-<body ng-controller="MainController">
-  <div class="test-case">
+<body ng-controller="ManualTestsController">
+  <div class="test-case" type="match">
     <header>
-      It should be indifferent from reference without grid and noise
+      it should <strong>be indifferent from reference</strong> without grid and noise
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
     <div class="reference">
-      <img src="test/manual/reference/normal-nogrid.png">
+      <img src="specs/manual/reference/normal-nogrid.png">
     </div>
 
     <div class="implementation">
@@ -33,14 +39,14 @@
     </div>
   </div>
 
-  <div class="test-case">
+  <div class="test-case" type="not-match">
     <header>
-      It should be different from reference with noise and without grid
+      it should <strong>be different from reference</strong> with noise and without grid
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
     <div class="reference">
-      <img src="test/manual/reference/normal-nogrid.png">
+      <img src="specs/manual/reference/normal-nogrid.png">
     </div>
 
     <div class="implementation">
@@ -48,14 +54,14 @@
     </div>
   </div>
 
-  <div class="test-case">
+  <div class="test-case" type="match">
     <header>
-      It should be indifferent from reference with grid and without noise
+      it should <strong>be indifferent from reference with grid</strong> and without noise
       <small>pixel-to-pixel comparsion against image</small>
     </header>
 
     <div class="reference">
-      <img src="test/manual/reference/normal-grid.png">
+      <img src="specs/manual/reference/normal-grid.png">
     </div>
 
     <div class="implementation">
@@ -63,14 +69,14 @@
     </div>
   </div>
 
-  <div class="test-case">
+  <div class="test-case" type="comparsion">
     <header>
-      It should be more different from reference as more the more is noise level
+      it should <strong>be more different from reference as more the noise level is bigger</strong>
       <small>pixel-to-pixel comparsions against image</small>
     </header>
 
     <div class="reference">
-      <img src="test/manual/reference/normal-grid.png">
+      <img src="specs/manual/reference/normal-grid.png">
     </div>
 
     <div class="implementation">
@@ -83,10 +89,6 @@
 
     <div class="implementation">
       <ecg-simulator width="500" height="150" noise="0.5"  static></ecg-simulator>
-    </div>
-
-    <div class="implementation">
-      <ecg-simulator width="500" height="150" noise="0.65" static></ecg-simulator>
     </div>
   </div>
 </body>

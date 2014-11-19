@@ -1,3 +1,7 @@
 canvas {
-  margin: 1px;
+  margin: 1px 0px;
+}
+
+ecg-simulator {
+  display: inline-block;
 }
