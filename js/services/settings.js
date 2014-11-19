@@ -28,8 +28,30 @@ angular
   idioventricular.qrs.duration = 0.16;
   idioventricular.t.positive = false;
 
+  var acceleratedJunctional = JSON.parse(JSON.stringify(normal));
+  acceleratedJunctional.beats = 80;
+  acceleratedJunctional.p.interval = 0.12;
+  acceleratedJunctional.q.visible = false;
+  acceleratedJunctional.p.positive = false;
+
+  var acceleratedIdioventricular = JSON.parse(JSON.stringify(normal));
+  acceleratedIdioventricular.beats = 65;
+  acceleratedIdioventricular.p.visible = false;
+  acceleratedIdioventricular.q.visible = false;
+  acceleratedIdioventricular.qrs.duration = 0.16;
+  acceleratedIdioventricular.t.positive = false;
+
+  var firstDegreeAVBlock = JSON.parse(JSON.stringify(normal));
+  firstDegreeAVBlock.beats = 62;
+  firstDegreeAVBlock.q.visible = false;
+  firstDegreeAVBlock.p.interval = 0.3;
+
+
   return {
     normal: normal,
-    idioventricularRhythm: idioventricular
+    idioventricularRhythm: idioventricular,
+    acceleratedJunctionalRhythm: acceleratedJunctional,
+    acceleratedIdioventricularRhythm: acceleratedIdioventricular,
+    firstDegreeAVBlock: firstDegreeAVBlock
   };
 });
