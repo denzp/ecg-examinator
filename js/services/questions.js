@@ -13,18 +13,8 @@ angular
       answers: [
         { id: 0, text: 'нормальна екг', correct: true },
         { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
-        { id: 2, text: 'TODO', correct: false },
-        { id: 3, text: 'TODO', correct: false },
-      ]
-    },
-    {
-      type: 'normal',
-      noise: 0.5,
-      answers: [
-        { id: 0, text: 'нормальна екг', correct: true },
-        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
-        { id: 2, text: 'TODO', correct: false },
-        { id: 3, text: 'TODO', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
       ]
     },
     {
@@ -33,8 +23,49 @@ angular
       answers: [
         { id: 0, text: 'нормальна екг', correct: false },
         { id: 1, text: 'ідіовентрикулярний ритм', correct: true },
-        { id: 2, text: 'TODO', correct: false },
-        { id: 3, text: 'TODO', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
+      ]
+    },
+    {
+      type: 'acceleratedJunctionalRhythm',
+      noise: 0.0,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: true },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
+      ]
+    },
+    {
+      type: 'firstDegreeAVBlock',
+      noise: 0.0,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: true },
+      ]
+    },
+    {
+      type: 'acceleratedIdioventricularRhythm',
+      noise: 0.0,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'прискорений ідіовентрикулярний ритм', correct: true },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
+      ]
+    },
+
+    {
+      type: 'normal',
+      noise: 0.5,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: true },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
       ]
     },
     {
@@ -43,8 +74,38 @@ angular
       answers: [
         { id: 0, text: 'нормальна екг', correct: false },
         { id: 1, text: 'ідіовентрикулярний ритм', correct: true },
-        { id: 2, text: 'TODO', correct: false },
-        { id: 3, text: 'TODO', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
+      ]
+    },
+    {
+      type: 'acceleratedJunctionalRhythm',
+      noise: 0.5,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: true },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
+      ]
+    },
+    {
+      type: 'firstDegreeAVBlock',
+      noise: 0.5,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'ідіовентрикулярний ритм', correct: false },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: true },
+      ]
+    },
+    {
+      type: 'acceleratedIdioventricularRhythm',
+      noise: 0.5,
+      answers: [
+        { id: 0, text: 'нормальна екг', correct: false },
+        { id: 1, text: 'прискорений ідіовентрикулярний ритм', correct: true },
+        { id: 2, text: 'прискоренный вузловой ритм', correct: false },
+        { id: 3, text: 'атріовентрикулярна блокада 1 ступеню', correct: false },
       ]
     },
   ];

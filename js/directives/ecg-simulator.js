@@ -142,6 +142,14 @@ angular
         y: translateY($scope.height, ResultWave(0, $scope.preset || 'normal', $scope.noise))
       };
 
+      $scope.$on('reset-ecg-simulation', function() {
+        $scope.last = {
+          offset: 0,
+          x: margin.left,
+          y: translateY($scope.height, ResultWave(0, $scope.preset || 'normal', $scope.noise))
+        };
+      });
+
       // should run on after canvas had been set
       setTimeout(function() {
         if($scope.grid) {

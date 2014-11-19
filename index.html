@@ -69,25 +69,10 @@
     </nav>
 
     <div class="container main-container">
-
-      <!-- <div class="row">
-        <div class="col-xs-6 col-md-4">
-          <input-ecg></input-ecg>
-        </div>
-        <div class="col-xs-12 col-md-8"> -->
-      <center>
-        <div>
-          <ecg-simulator></ecg-simulator>
-        </div>
-        <div>
-          <ecg-simulator noise="0.2"></ecg-simulator>
-        </div>
-        <div>
-          <ecg-simulator noise="0.5"></ecg-simulator>
-        </div>
+      <center ng-if="questNum <= questCount">
+        <ecg-simulator preset="question.type" noise="question.noise">
+        </ecg-simulator>
       </center>
-      <!--   </div>
-      </div> -->
 
       <hr />
 

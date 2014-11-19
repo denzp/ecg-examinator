@@ -8,6 +8,7 @@ canvas {
 
 ecg-simulator {
   display: inline-block;
+  background-color: white;
 }
 
 .signin-container {
