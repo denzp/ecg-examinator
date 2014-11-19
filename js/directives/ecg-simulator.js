@@ -84,6 +84,11 @@ angular
     var point = getNextPoint($scope, stepX);
 
     if(point.x >= $scope.width - margin.right) {
+      if($scope.static) {
+        $scope.shouldStopAnimation = true;
+        return;
+      }
+
       $scope.last.x = margin.left - 1;
       point.x = margin.left;
     }
@@ -95,7 +100,9 @@ angular
     this.fillRect($scope.last.x, 0, cleanWidth, $scope.height);
 
     this.globalCompositeOperation = 'destination-over';
-    drawGrid.call(this, $scope.last.x, cleanWidth, $scope.height);
+    if($scope.grid) {
+      drawGrid.call(this, $scope.last.x, cleanWidth, $scope.height);
+    }
 
     this.globalCompositeOperation = 'source-over';
 
@@ -119,11 +126,14 @@ angular
       preset: '=?',
     },
 
-    link: function($scope, element) {
+    link: function($scope, element, attrs) {
       if(!$scope.width)  { $scope.width = 800; }
       if(!$scope.height) { $scope.height = Settings.ppm * 30 + margin.top + margin.bottom; }
       if(!$scope.preset) { $scope.preset = 'normal'; }
       if($scope.noise === undefined) { $scope.noise = 0; }
+
+      $scope.static = attrs.static !== undefined;
+      $scope.grid   = attrs.noGrid === undefined;
 
       var ctx = element.find('canvas')[0].getContext('2d');
 
@@ -134,8 +144,11 @@ angular
       };
 
       window.requestAnimationFrame(function() {
-        drawGrid.call(ctx, 0, $scope.width, $scope.height);
+        if($scope.grid) {
+          drawGrid.call(ctx, 0, $scope.width, $scope.height);
+        }
 
+        // draw 1v helper
         ctx.lineWidth = 1.5;
         ctx.strokeStyle = 'rgb(0, 0, 0)';
         ctx.beginPath();
@@ -150,7 +163,10 @@ angular
 
         window.requestAnimationFrame(function handler() {
           drawHandler.call(ctx, $scope);
-          window.requestAnimationFrame(handler);
+
+          if(!$scope.shouldStopAnimation) {
+            window.requestAnimationFrame(handler);
+          }
         });
       });
     }

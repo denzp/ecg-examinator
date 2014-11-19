@@ -1,0 +1,93 @@
+<html ng-app="ecg">
+<head>
+  <title>ECG tests</title>
+
+  <base href="../../">
+
+  <script src="lib/angular.js"></script>
+  <script src="lib/BSpline.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/request-animation-frame.js"></script>
+  <script src="js/controllers/main.js"></script>
+  <script src="js/directives/ecg-simulator.js"></script>
+  <script src="js/services/settings.js"></script>
+  <script src="js/services/waves.js"></script>
+  <script src="js/services/result-wave.js"></script>
+
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body ng-controller="MainController">
+  <div class="test-case">
+    <header>
+      It should be indifferent from reference without grid and noise
+      <small>pixel-to-pixel comparsion against image</small>
+    </header>
+
+    <div class="reference">
+      <img src="test/manual/reference/normal-nogrid.png">
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" static no-grid></ecg-simulator>
+    </div>
+  </div>
+
+  <div class="test-case">
+    <header>
+      It should be different from reference with noise and without grid
+      <small>pixel-to-pixel comparsion against image</small>
+    </header>
+
+    <div class="reference">
+      <img src="test/manual/reference/normal-nogrid.png">
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" noise="0.2" static no-grid></ecg-simulator>
+    </div>
+  </div>
+
+  <div class="test-case">
+    <header>
+      It should be indifferent from reference with grid and without noise
+      <small>pixel-to-pixel comparsion against image</small>
+    </header>
+
+    <div class="reference">
+      <img src="test/manual/reference/normal-grid.png">
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" static></ecg-simulator>
+    </div>
+  </div>
+
+  <div class="test-case">
+    <header>
+      It should be more different from reference as more the more is noise level
+      <small>pixel-to-pixel comparsions against image</small>
+    </header>
+
+    <div class="reference">
+      <img src="test/manual/reference/normal-grid.png">
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" noise="0.2"  static></ecg-simulator>
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" noise="0.35" static></ecg-simulator>
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" noise="0.5"  static></ecg-simulator>
+    </div>
+
+    <div class="implementation">
+      <ecg-simulator width="500" height="150" noise="0.65" static></ecg-simulator>
+    </div>
+  </div>
+</body>
+</html>
