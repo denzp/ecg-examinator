@@ -27,12 +27,12 @@
 
   <div class="container signin-container" ng-if="!authenticated">
     <form class="form-signin" role="form" ng-submit="signIn()">
-      <h2 class="form-signin-heading">Please sign in</h2>
-      <label class="sr-only">Login</label>
+      <h2 class="form-signin-heading">Аутентифікація</h2>
+      <label class="sr-only">Логін</label>
       <input ng-model="user.login" type="text" class="form-control" placeholder="Login" required="" autofocus="" />
-      <label class="sr-only">Password</label>
+      <label class="sr-only">Пароль</label>
       <input ng-model="user.password" type="password" class="form-control" placeholder="Password" required="" />
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Увійти</button>
     </form>
   </div>
 
@@ -42,7 +42,7 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Відкрити навігацію</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -53,14 +53,14 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class="navbar-text">
-                Signed in as <a href="#" class="navbar-link" ng-bind="user.login"></a>
+                Ви увійшли як <a href="#" class="navbar-link" ng-bind="user.login"></a>
               </p>
             </li>
             <li class="divider"></li>
             <li>
               <a href="#" ng-click="signOut()">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                Sign out
+                Вийти
               </a>
             </li>
           </ul>
@@ -94,7 +94,7 @@
       <div ng-if="questNum <= questCount">
 
         <h3>
-          Question #<strong ng-bind="questNum"></strong> of <strong ng-bind="questCount"></strong>:
+          Питання №<strong ng-bind="questNum"></strong> з <strong ng-bind="questCount"></strong>:
         </h3>
 
         <ul class="list-group answers-list">
@@ -107,11 +107,11 @@
                 ng-show="question && question.choice != undefined"
                 ng-click="getNextQuestion()">
           <span ng-show="questNum < questCount">
-            Next
+            Наступне запитання
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           </span>
           <span ng-show="questNum == questCount">
-            Check me, i am ready!
+            Здати тест
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           </span>
         </button>
@@ -120,7 +120,7 @@
 
       <div ng-if="questNum > questCount">
         <div class="alert alert-info font-25" role="alert">
-          Your result:
+          Ваш результат:
           <span class="text-success font-45" ng-bind="correct"></span>
           /
           <span class="text-warning" ng-bind="questCount"></span>
