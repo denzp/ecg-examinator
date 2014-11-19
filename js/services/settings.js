@@ -46,7 +46,6 @@ angular
   firstDegreeAVBlock.q.visible = false;
   firstDegreeAVBlock.p.interval = 0.3;
 
-
   return {
     normal: normal,
     idioventricularRhythm: idioventricular,

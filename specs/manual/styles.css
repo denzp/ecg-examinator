@@ -5,6 +5,7 @@
   border-radius: 2px;
   padding: 5px;
   box-shadow: 1px 1px 3px rgb(150, 150, 150);
+  background-color: white;
 }
 header {
   font-size: 22pt;
