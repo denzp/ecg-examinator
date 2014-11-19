@@ -77,8 +77,8 @@ angular
 
   function drawHandler($scope) {
     var pixelsPerSecond    = Settings.paperSpeed * Settings.ppm,
-        pixelsPerHeartBeet = Presets[$scope.preset || 'normal'].beats / 60 * pixelsPerSecond,
-        stepX = Math.ceil(pixelsPerHeartBeet / Settings.lod),
+        pixelsPerHeartBeet = 60 * pixelsPerSecond / Presets[$scope.preset || 'normal'].beats,
+        stepX = pixelsPerHeartBeet / Settings.lod,
         cleanWidth = stepX * 2 + 75;
 
     var point = getNextPoint($scope, stepX);

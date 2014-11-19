@@ -137,7 +137,7 @@ angular
     if(Presets[preset].t.visible)   { components.push(TWave); }
     if(Presets[preset].u.visible)   { components.push(UWave); }
 
-    var li = 30 / Presets[preset].beats;
+    var li = 30 / 60;
 
     var result = new Array(Settings.lod);
     for(var i = 0; i < result.length; ++i) {
