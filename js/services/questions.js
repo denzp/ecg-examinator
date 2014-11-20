@@ -112,7 +112,7 @@ angular
 
   function shuffle(array) {
     var i = array.length;
-    while(i--) {
+    while(--i) {
       var j = Math.floor(Math.random() * (i + 1));
 
       var temp = array[i];
