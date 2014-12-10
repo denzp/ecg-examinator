@@ -5,14 +5,19 @@
   <script src="lib/jquery-2.1.1.js"></script>
   <script src="lib/bootstrap.js"></script>
   <script src="lib/angular.js"></script>
+  <script src="lib/angular-route.js"></script>
   <script src="lib/BSpline.js"></script>
 
   <script src="js/app.js"></script>
   <script src="js/request-animation-frame.js"></script>
-  <script src="js/controllers/main.js"></script>
+
+  <script src="js/controllers/quiz.js"></script>
+  <script src="js/controllers/page.js"></script>
+
   <script src="js/directives/input-ecg.js"></script>
   <script src="js/directives/ecg-simulator.js"></script>
-  <script src="js/services/authentication.js"></script>
+
+  <script src="js/services/authorization.js"></script>
   <script src="js/services/cardio.js"></script>
   <script src="js/services/electrodes.js"></script>
   <script src="js/services/settings.js"></script>
@@ -23,94 +28,34 @@
   <link rel="stylesheet" href="css/bootstrap.css" />
   <link rel="stylesheet" href="css/app.css" />
 </head>
-<body ng-controller="MainController" ng-cloak>
-
-  <div class="container signin-container" ng-if="!authenticated">
-    <form class="form-signin" role="form" ng-submit="signIn()">
-      <h2 class="form-signin-heading">Аутентифікація</h2>
-
-      <label class="sr-only">Логін</label>
-      <input ng-model="user.login" type="text" class="form-control" placeholder="Логін" required autofocus />
-
-      <label class="sr-only">Пароль</label>
-      <input ng-model="user.password" type="password" class="form-control" placeholder="Пароль" required />
-
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Увійти</button>
-    </form>
-  </div>
-
-  <div ng-if="authenticated">
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="javascript:void()">Електрокардіограма</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <p class="navbar-text">
-                Ви увійшли як <a href="#" class="navbar-link" ng-bind="user.login"></a>
-              </p>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="#" ng-click="signOut()">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                Вийти
-              </a>
-            </li>
-          </ul>
-        </div>
+<body ng-controller="PageController as page" ng-cloak>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand">Електрокардіограма</a>
       </div>
-    </nav>
 
-    <div class="container main-container" ng-if="questNum <= questCount">
-      <h5>
-        Питання <strong ng-bind="questNum"></strong>
-        з <strong ng-bind="questCount"></strong>
-      </h5>
-      <h3>
-        Яка хвороба відповідає даній кардіограмі?
-      </h3>
+      <div id="navbar" class="collapse navbar-collapse" ng-if="page.user.isAuthorized">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <p class="navbar-text">
+              Ви увійшли як <a href="#" class="navbar-link" ng-bind="page.user.login"></a>
+            </p>
+          </li>
 
-      <center>
-        <ecg-simulator preset="question.type" noise="question.noise">
-        </ecg-simulator>
-      </center>
-
-      <hr />
-
-      <div>
-        <ul class="list-group answers-list">
-          <li class="list-group-item" ng-repeat="answer in question.answers"
-              ng-class="{active: answer.id == question.choice}"
-              ng-bind="answer.text" ng-click="makeChoise(answer.id)">
+          <li class="divider"></li>
+          <li>
+            <a href="#" ng-click="page.signOut()">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              Вийти
+            </a>
           </li>
         </ul>
-        <button type="button" class="btn btn-primary btn-lg btn-block"
-                ng-show="question && question.choice != undefined"
-                ng-click="getNextQuestion()">
-          <span ng-show="questNum < questCount">
-            Наступне запитання
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          </span>
-          <span ng-show="questNum == questCount">
-            Здати тест
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-          </span>
-        </button>
       </div>
     </div>
+  </nav>
 
-    <div class="container main-container result-page" ng-if="questNum > questCount">
-      <header>Ваш результат</header>
-      <content>
-        {{correct}}<small> / {{questCount}}</small>
-      </content>
-    </div>
-
-  </div>
+  <ng-view></ng-view>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-.module('ecg.controllers')
+.module('ecg.directives')
 .directive('inputEcg', function(Cardio, Leads) {
   function drawHandler($scope) {
     var w = $scope.width,

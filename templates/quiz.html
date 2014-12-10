@@ -1,0 +1,44 @@
+<div class="container main-container" ng-if="questNum <= questCount">
+  <h5>
+    Питання <strong ng-bind="questNum"></strong>
+    з <strong ng-bind="questCount"></strong>
+  </h5>
+  <h3>
+    Яка хвороба відповідає даній кардіограмі?
+  </h3>
+
+  <center>
+    <ecg-simulator preset="question.type" noise="question.noise">
+    </ecg-simulator>
+  </center>
+
+  <hr />
+
+  <div>
+    <ul class="list-group answers-list">
+      <li class="list-group-item" ng-repeat="answer in question.answers"
+      ng-class="{active: answer.id == question.choice}"
+      ng-bind="answer.text" ng-click="makeChoise(answer.id)">
+    </li>
+  </ul>
+  <button type="button" class="btn btn-primary btn-lg btn-block"
+  ng-show="question && question.choice != undefined"
+  ng-click="getNextQuestion()">
+  <span ng-show="questNum < questCount">
+    Наступне запитання
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </span>
+  <span ng-show="questNum == questCount">
+    Здати тест
+    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+  </span>
+</button>
+</div>
+</div>
+
+<div class="container main-container result-page" ng-if="questNum > questCount">
+  <header>Ваш результат</header>
+  <content>
+    {{correct}}<small> / {{questCount}}</small>
+  </content>
+</div>

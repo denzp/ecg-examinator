@@ -4,7 +4,7 @@ describe('Authorization', function() {
     browser.waitForAngular();
 
     var form = element(by.css('.form-signin'));
-    var container = by.css('.signin-container');
+    var container = by.css('.signin.container');
 
     form.element(by.css('[type="submit"]')).click();
     expect(browser.isElementPresent(container)).toBe(true);
@@ -15,9 +15,9 @@ describe('Authorization', function() {
     browser.waitForAngular();
 
     var form = element(by.css('.form-signin'));
-    var container = by.css('.signin-container');
+    var container = by.css('.signin.container');
 
-    form.element(by.model('user.login')).sendKeys('John');
+    form.element(by.model('page.user.login')).sendKeys('John');
 
     form.element(by.css('[type="submit"]')).click();
     expect(browser.isElementPresent(container)).toBe(true);
@@ -28,9 +28,9 @@ describe('Authorization', function() {
     browser.waitForAngular();
 
     var form = element(by.css('.form-signin'));
-    var container = by.css('.signin-container');
+    var container = by.css('.signin.container');
 
-    form.element(by.model('user.password')).sendKeys('Doe');
+    form.element(by.model('page.user.password')).sendKeys('Doe');
 
     form.element(by.css('[type="submit"]')).click();
     expect(browser.isElementPresent(container)).toBe(true);
@@ -41,10 +41,10 @@ describe('Authorization', function() {
     browser.waitForAngular();
 
     var form = element(by.css('.form-signin'));
-    var container = by.css('.signin-container');
+    var container = by.css('.signin.container');
 
-    form.element(by.model('user.login')).sendKeys('John');
-    form.element(by.model('user.password')).sendKeys('Doe');
+    form.element(by.model('page.user.login')).sendKeys('John');
+    form.element(by.model('page.user.password')).sendKeys('Doe');
 
     form.element(by.css('[type="submit"]')).click();
     expect(browser.isElementPresent(container)).toBe(false);

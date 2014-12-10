@@ -1,0 +1,33 @@
+<div class="container signin" ng-if="!page.user.isAuthorized">
+  <form class="form-signin" role="form" ng-submit="page.signIn()">
+    <h2 class="form-signin-heading">Аутентифікація</h2>
+
+    <label class="sr-only">Логін</label>
+    <input ng-model="page.user.login" type="text"
+           class="form-control" placeholder="Логін" required autofocus />
+
+    <label class="sr-only">Пароль</label>
+    <input ng-model="page.user.password" type="password"
+           class="form-control" placeholder="Пароль" required />
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+      Увійти
+    </button>
+  </form>
+</div>
+
+<div class="container action-chooser" ng-if="page.user.isAuthorized">
+  <div>
+    <a class="btn btn-lg btn-default btn-block" href="#/teach">
+      Вивчити теорію
+    </a>
+  </div>
+
+  <div>
+    <a class="btn btn-lg btn-primary btn-block" href="#/quiz">
+      Пройти тест
+    </a>
+  </div>
+
+  <a href="#/admin" class="admin-btn glyphicon glyphicon-wrench"></a>
+</div>

@@ -2,23 +2,11 @@
 
 angular
 .module('ecg.controllers')
-.controller('MainController', function($scope, Authentication, Questions) {
-
-  $scope.authenticated = Authentication.authenticated;
-  $scope.user = { };
-
-  $scope.signIn = function() {
-    $scope.authenticated = Authentication.signIn($scope.user.login, $scope.user.password);
-  };
-
-  $scope.signOut = function() {
-    $scope.authenticated = Authentication.signOut();
-    $scope.user.password = '';
-  };
-
+.controller('QuizController', function($scope, Authorization, Questions) {
   $scope.questNum = 0,
   $scope.questCount = 5;
   $scope.correct = 0;
+
   var questions = Questions($scope.questCount);
   $scope.questCount = questions.length;
 
@@ -42,5 +30,4 @@ angular
   $scope.makeChoise = function(index) {
     $scope.question.choice = index;
   };
-
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-.module('ecg.controllers')
+.module('ecg.directives')
 .directive('ecgSimulator', function(Presets, Settings, ResultWave) {
   var margin = {
     left: 45,
@@ -117,7 +117,7 @@ angular
 
   function initialDraw($scope, ctx) {
     ctx.clearRect(0, 0, $scope.width, $scope.height);
-    
+
     if($scope.grid) {
       drawGrid.call(ctx, 0, $scope.width, $scope.height);
     }

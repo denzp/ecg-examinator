@@ -2,6 +2,10 @@ html, body {
   background-color: #eee;
 }
 
+body {
+  padding-top: 50px;
+}
+
 canvas {
   margin: 1px 0px;
 }
@@ -11,13 +15,22 @@ ecg-simulator {
   background-color: white;
 }
 
-.signin-container {
+.container.signin {
   padding-top: 40px;
   padding-bottom: 40px;
 }
 
-.main-container {
+.container.main {
   padding-top: 75px;
+}
+
+.container.action-chooser {
+  padding-top: 75px;
+  width: 300px;
+}
+
+.container.action-chooser > div {
+  padding: 5px;
 }
 
 .form-signin {
@@ -95,4 +108,17 @@ ecg-simulator {
 .result-page content small {
   font-size: 0.7em;
   color: rgb(100, 100, 100);
+}
+
+.admin-btn {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  top: auto;
+
+  color: rgba(0, 0, 0, 0.3);
+}
+.admin-btn:hover, .admin-btn:focus {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.4);
 }

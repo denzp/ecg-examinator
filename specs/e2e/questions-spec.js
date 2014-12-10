@@ -1,10 +1,12 @@
 function login(user, password) {
   var form = element(by.css('.form-signin'));
 
-  form.element(by.model('user.login')).sendKeys(user);
-  form.element(by.model('user.password')).sendKeys(password);
+  form.element(by.model('page.user.login')).sendKeys(user);
+  form.element(by.model('page.user.password')).sendKeys(password);
 
   form.submit();
+
+  element(by.css('a[href="#/quiz"]')).click();
 }
 
 function getAnswer(index) {

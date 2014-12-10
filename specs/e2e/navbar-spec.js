@@ -1,8 +1,8 @@
 function login(user, password) {
   var form = element(by.css('.form-signin'));
 
-  form.element(by.model('user.login')).sendKeys(user);
-  form.element(by.model('user.password')).sendKeys(password);
+  form.element(by.model('page.user.login')).sendKeys(user);
+  form.element(by.model('page.user.password')).sendKeys(password);
 
   form.submit();
 }
@@ -13,7 +13,7 @@ describe('Navigation bar', function() {
     browser.waitForAngular();
 
     login('John', 'Doe');
-    var elem = element(by.css('.navbar-text')).element(by.binding('user.login'));
+    var elem = element(by.css('.navbar-text')).element(by.binding('page.user.login'));
 
     expect(elem.getText()).toBe('John');
 
@@ -21,7 +21,7 @@ describe('Navigation bar', function() {
     browser.waitForAngular();
 
     login('nhoJ', 'Doe');
-    var elem = element(by.css('.navbar-text')).element(by.binding('user.login'));
+    var elem = element(by.css('.navbar-text')).element(by.binding('page.user.login'));
 
     expect(elem.getText()).toBe('nhoJ');
   });
@@ -31,9 +31,9 @@ describe('Navigation bar', function() {
     browser.waitForAngular();
 
     login('John', 'Doe');
-    element(by.css('#navbar')).element(by.css('[ng-click="signOut()"]')).click();
+    element(by.css('#navbar')).element(by.css('[ng-click="page.signOut()"]')).click();
 
-    var signinContainer = by.css('.signin-container');
+    var signinContainer = by.css('.signin.container');
     expect(browser.isElementPresent(signinContainer)).toBe(true);
   });
 
@@ -42,14 +42,14 @@ describe('Navigation bar', function() {
     browser.waitForAngular();
 
     login('John', 'Doe');
-    element(by.css('#navbar')).element(by.css('[ng-click="signOut()"]')).click();
+    element(by.css('#navbar')).element(by.css('[ng-click="page.signOut()"]')).click();
 
-    var signinContainer = by.css('.signin-container');
+    var signinContainer = by.css('.signin.container');
     expect(browser.isElementPresent(signinContainer)).toBe(true);
 
     login('nhoJ', 'Doe');
 
-    var elem = element(by.css('.navbar-text')).element(by.binding('user.login'));
-    expect(elem.getText()).toBe('JohnnhoJ');
+    var elem = element(by.css('.navbar-text')).element(by.binding('page.user.login'));
+    expect(elem.getText()).toBe('nhoJ');
   });
 });
