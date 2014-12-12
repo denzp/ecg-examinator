@@ -12,9 +12,9 @@ angular.module('ecg', [
 ])
 
 .run(function() {
-  if(location.href.indexOf('#') >= 0) {
+  /*if(location.href.indexOf('#') >= 0) {
     location.href = /(.*)#/.exec(location.href)[1];
-  }
+  }*/
 })
 
 .config(function($routeProvider, $locationProvider) {
@@ -25,7 +25,8 @@ angular.module('ecg', [
     })
     .when('/admin', {
       templateUrl: 'templates/admin.html',
-      controller: 'AdminController'
+      controller: 'AdminController',
+      controllerAs: 'admin'
     })
     .otherwise({
       templateUrl: 'templates/index.html'

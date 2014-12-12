@@ -12,6 +12,8 @@ angular
 
 .factory('Presets', function() {
   var normal = {
+    name: 'Нормальна ЕКГ',
+    id:   'normal',
     beats: 60, // per minute
     p:   { duration: 0.08,   amplitude: 0.15,  interval: 0.15,  visible: true,  positive: true  },
     q:   { duration: 0.066,  amplitude: 0.025, interval: 0.166, visible: true,  positive: false },
@@ -22,6 +24,8 @@ angular
   };
 
   var idioventricular = JSON.parse(JSON.stringify(normal));
+  idioventricular.id = 'idioventricularRhythm';
+  idioventricular.name = 'Ідіовентрикулярний ритм';
   idioventricular.beats = 35;
   idioventricular.p.visible = false;
   idioventricular.q.visible = false;
@@ -29,12 +33,16 @@ angular
   idioventricular.t.positive = false;
 
   var acceleratedJunctional = JSON.parse(JSON.stringify(normal));
+  acceleratedJunctional.id = 'acceleratedJunctionalRhythm';
+  acceleratedJunctional.name = 'Прискоренный вузловой ритм';
   acceleratedJunctional.beats = 80;
   acceleratedJunctional.p.interval = 0.12;
   acceleratedJunctional.q.visible = false;
   acceleratedJunctional.p.positive = false;
 
   var acceleratedIdioventricular = JSON.parse(JSON.stringify(normal));
+  acceleratedIdioventricular.id = 'acceleratedIdioventricularRhythm';
+  acceleratedIdioventricular.name = 'Прискоренный ідіовентрикулярний ритм';
   acceleratedIdioventricular.beats = 65;
   acceleratedIdioventricular.p.visible = false;
   acceleratedIdioventricular.q.visible = false;
@@ -42,15 +50,24 @@ angular
   acceleratedIdioventricular.t.positive = false;
 
   var firstDegreeAVBlock = JSON.parse(JSON.stringify(normal));
+  firstDegreeAVBlock.id = 'firstDegreeAVBlock';
+  firstDegreeAVBlock.name = 'Атріовентрикулярна блокада 1 ступеню';
   firstDegreeAVBlock.beats = 62;
   firstDegreeAVBlock.q.visible = false;
   firstDegreeAVBlock.p.interval = 0.3;
 
-  return {
-    normal: normal,
-    idioventricularRhythm: idioventricular,
-    acceleratedJunctionalRhythm: acceleratedJunctional,
-    acceleratedIdioventricularRhythm: acceleratedIdioventricular,
-    firstDegreeAVBlock: firstDegreeAVBlock
-  };
+  var presets = [
+    normal,
+    idioventricular,
+    acceleratedJunctional,
+    acceleratedIdioventricular,
+    firstDegreeAVBlock
+  ];
+
+  var transformedPresets = { };
+  presets.forEach(function(preset) {
+    transformedPresets[preset.id] = preset;
+  });
+
+  return transformedPresets;
 });

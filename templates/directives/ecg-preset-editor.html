@@ -1,0 +1,30 @@
+<div ng-if="preset.duration !== undefined">
+  <label>тривалість</label>
+  <input type="text" class="form-control input-sm" ng-model="preset.duration">
+  <input type="range" min="0" max="0.3" step="0.001" ng-model="preset.duration"
+         ng-model-options="{ debounce: {'default': 50 } }">
+</div>
+<div ng-if="preset.amplitude !== undefined">
+  <label>амплітуда</label>
+  <input type="text" class="form-control input-sm" ng-model="preset.amplitude">
+  <input type="range" min="0" max="1.5" step="0.001" ng-model="preset.amplitude"
+         ng-model-options="{ debounce: {'default': 50 } }">
+</div>
+<div ng-if="preset.interval !== undefined">
+  <label>зсув</label>
+  <input type="text" class="form-control input-sm" ng-model="preset.interval">
+  <input type="range" min="0" max="1" step="0.001" ng-model="preset.interval"
+         ng-model-options="{ debounce: {'default': 50 } }">
+</div>
+<div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="preset.visible"> видимий
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="preset.positive"> позитивний
+    </label>
+  </div>
+</div>
