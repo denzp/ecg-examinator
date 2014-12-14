@@ -64,3 +64,12 @@ ecg-preset-editor input[type="text"] {
 .admin-presets .btn-warning {
   margin-right: 20px;
 }
+
+.admin-presets   .preset-viewer,
+.admin-questions .preset-viewer {
+  text-align: center;
+}
+.admin-presets   .preset-viewer canvas,
+.admin-questions .preset-viewer canvas {
+  background-color: white;
+}

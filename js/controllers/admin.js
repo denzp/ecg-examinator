@@ -2,12 +2,11 @@
 
 angular
 .module('ecg.controllers')
-.controller('AdminController', function($scope, Questions, Presets) {
+.controller('AdminController', function($scope, QuestionStorage, Presets) {
   var self = this;
 
-  this.questions = Questions;
+  this.questions = QuestionStorage.questions;
   this.presets   = Presets;
-  this.originalPresets = clone(this.presets);
 
   this.waveDescriptors = [ 'p', 'q', 'qrs', 's', 't', 'u' ];
 
