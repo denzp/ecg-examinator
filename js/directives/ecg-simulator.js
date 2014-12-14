@@ -1,12 +1,23 @@
 'use strict';
 
-function ECGSimulator(Presets, Settings, ResultWave, context) {
-  this.Presets    = Presets;
-  this.Settings   = Settings;
-  this.ResultWave = ResultWave;
+function ECGSimulator(Settings, ctx, wave) {
+  this.Settings = Settings;
 
-  this.ctx = context;
+  this.ctx  = ctx;
+  this.wave = wave;
 }
+
+ECGSimulator.prototype.initialize = function($scope, attrs) {
+  if($scope.noise === undefined) { $scope.noise = 0; }
+  if(!$scope.width) { $scope.width = 800; }
+  if(!$scope.height) {
+    $scope.height = this.Settings.ppm * 30 + this.MARGIN.top + this.MARGIN.bottom;
+  }
+
+  $scope.grid = attrs.noGrid === undefined;
+
+  this.reset($scope);
+};
 
 ECGSimulator.prototype.drawGrid = function(startX, width, height) {
   var linesPerHeight = Math.floor(height / this.Settings.ppm / 2),
@@ -59,18 +70,31 @@ ECGSimulator.prototype.drawGrid = function(startX, width, height) {
   }
 };
 
-ECGSimulator.prototype.run = function($scope) {
+ECGSimulator.prototype.run = function($scope, oneTime) {
   var self = this;
 
   this.clear($scope);
 
   window.requestAnimationFrame(function handler() {
-    self.draw($scope);
+    if(oneTime !== undefined) {
+      self.drawStatic($scope);
+    }
+    else {
+      self.draw($scope);
+    }
 
     if(!$scope.shouldStopAnimation) {
       window.requestAnimationFrame(handler);
     }
   });
+};
+
+ECGSimulator.prototype.runInstantly = function($scope, oneTime) {
+  this.clear($scope);
+
+  while(!$scope.shouldStopAnimation) {
+    this.drawStatic($scope);
+  }
 };
 
 ECGSimulator.prototype.clear = function($scope) {
@@ -103,7 +127,7 @@ ECGSimulator.prototype.drawHeartbeats = function($scope) {
 
   this.ctx.fillStyle = 'black';
   this.ctx.font = 'bold 10pt monospace';
-  this.ctx.fillText(this.Presets[$scope.preset || 'normal'].beats, 11.5, 5);
+  this.ctx.fillText($scope.presetInstance.beats, 11.5, 5);
 };
 
 ECGSimulator.prototype.MARGIN = {
@@ -115,18 +139,13 @@ ECGSimulator.prototype.MARGIN = {
 
 ECGSimulator.prototype.draw = function($scope) {
   var pixelsPerSecond    = this.Settings.paperSpeed * this.Settings.ppm,
-      pixelsPerHeartBeet = 60 * pixelsPerSecond / this.Presets[$scope.preset || 'normal'].beats,
+      pixelsPerHeartBeet = 60 * pixelsPerSecond / $scope.presetInstance.beats,
       stepX = pixelsPerHeartBeet / this.Settings.lod,
       cleanWidth = stepX * 2 + 75;
 
   var point = this.getNextPoint($scope, stepX);
 
   if(point.x >= $scope.width - this.MARGIN.right) {
-    if($scope.static) {
-      $scope.shouldStopAnimation = true;
-      return;
-    }
-
     $scope.last.x = this.MARGIN.left - 1;
     point.x = this.MARGIN.left;
   }
@@ -154,6 +173,28 @@ ECGSimulator.prototype.draw = function($scope) {
   $scope.last = point;
 }
 
+ECGSimulator.prototype.drawStatic = function($scope) {
+  var pixelsPerSecond    = this.Settings.paperSpeed * this.Settings.ppm,
+      pixelsPerHeartBeet = 60 * pixelsPerSecond / $scope.presetInstance.beats,
+      stepX = pixelsPerHeartBeet / this.Settings.lod;
+
+  var point = this.getNextPoint($scope, stepX);
+
+  if(point.x >= $scope.width - this.MARGIN.right) {
+    $scope.shouldStopAnimation = true;
+    return;
+  }
+
+  this.ctx.lineWidth = 1.5;
+  this.ctx.strokeStyle = 'rgb(0, 0, 0)';
+  this.ctx.beginPath();
+  this.ctx.moveTo($scope.last.x - 0.5, $scope.last.y);
+  this.ctx.lineTo(point.x, point.y);
+  this.ctx.stroke();
+
+  $scope.last = point;
+}
+
 ECGSimulator.prototype.translateY = function(height, y) {
   var h = (height - this.MARGIN.top - this.MARGIN.bottom) / 2;
   return height - this.MARGIN.top - h - this.Settings.ppm * 10 * y;
@@ -161,7 +202,7 @@ ECGSimulator.prototype.translateY = function(height, y) {
 
 ECGSimulator.prototype.getNextPoint = function($scope, stepX) {
   var x = $scope.last.x + stepX,
-  y = this.ResultWave($scope.last.offset, $scope.preset || 'normal', $scope.noise);
+  y = this.wave($scope.last.offset);
 
   return {
     offset: $scope.last.offset + 1,
@@ -171,16 +212,19 @@ ECGSimulator.prototype.getNextPoint = function($scope, stepX) {
 };
 
 ECGSimulator.prototype.reset = function($scope) {
+  $scope.shouldStopAnimation = undefined;
+
   $scope.last = {
     offset: 0,
     x: this.MARGIN.left,
-    y: this.translateY($scope.height, this.ResultWave(0, $scope.preset || 'normal', $scope.noise))
+    y: this.translateY($scope.height, this.wave(0))
   };
 };
 
 angular
 .module('ecg.directives')
-.directive('ecgSimulator', function(Presets, Settings, ResultWave) {
+
+.directive('ecgSimulator', function(Presets, Settings, StaticWave) {
   return {
     restrict: 'E',
     template: '<canvas width="{{width}}" height="{{height}}"></canvas>',
@@ -193,27 +237,65 @@ angular
     },
 
     link: function($scope, element, attrs) {
-      if($scope.noise === undefined) { $scope.noise = 0; }
-      if(!$scope.width) { $scope.width = 800; }
-      if(!$scope.height) {
-        $scope.height = Settings.ppm * 30 +
-                        ECGSimulator.prototype.MARGIN.top +
-                        ECGSimulator.prototype.MARGIN.bottom;
-      }
+      var ctx = element.find('canvas')[0].getContext('2d');
 
-      $scope.static = attrs.static !== undefined;
-      $scope.grid   = attrs.noGrid === undefined;
+      $scope.$watch('preset', function() {
+        $scope.presetInstance = Presets[$scope.preset || 'normal'];
+      });
 
-      var ctx       = element.find('canvas')[0].getContext('2d'),
-          simulator = new ECGSimulator(Presets, Settings, ResultWave, ctx);
+      var simulator = new ECGSimulator(Settings, ctx, function(offset) {
+        return StaticWave(offset, $scope.preset || 'normal', $scope.noise);
+      });
 
-      simulator.reset($scope);
-      setTimeout(simulator.run.bind(simulator, $scope));
+      simulator.initialize($scope, attrs);
+      setTimeout(simulator.run.bind(simulator, $scope, attrs.static));
 
-      $scope.$on('reset-ecg-simulation', function() {
+      $scope.$on('ecg-simulator:reset', function() {
         simulator.clear($scope);
         simulator.reset($scope);
       });
+    }
+  };
+})
+
+.directive('ecgSimulatorDynamic', function(Settings, DynamicWave, Composer) {
+  return {
+    restrict: 'E',
+    template: '<canvas width="{{width}}" height="{{height}}"></canvas>',
+
+    scope: {
+      width:  '=?',
+      height: '=?',
+      noise:  '=?',
+      preset: '=',
+    },
+
+    link: function($scope, element, attrs) {
+      var ctx  = element.find('canvas')[0].getContext('2d'),
+          wave = Composer($scope.preset);
+
+      var simulator = new ECGSimulator(Settings, ctx, function(offset) {
+        return DynamicWave(offset, wave, $scope.noise);
+      });
+
+      $scope.$watch('preset', function(current, prev) {
+        if(current === prev) {
+          return;
+        }
+
+        $scope.presetInstance = $scope.preset;
+        wave = Composer($scope.presetInstance);
+
+        simulator.clear($scope);
+        simulator.reset($scope);
+
+        simulator.runInstantly($scope);
+      }, true);
+
+      $scope.presetInstance = $scope.preset;
+      simulator.initialize($scope, attrs);
+
+      setTimeout(simulator.runInstantly.bind(simulator, $scope));
     }
   };
 });

@@ -11,7 +11,7 @@ angular
   $scope.questCount = questions.length;
 
   $scope.getNextQuestion = function() {
-    $scope.$broadcast('reset-ecg-simulation');
+    $scope.$broadcast('ecg-simulator:reset');
 
     if($scope.question && $scope.question.answers[$scope.question.choice].correct) {
       $scope.correct++;
