@@ -29,9 +29,7 @@ angular.module('ecg', [
       controllerAs: 'admin'
     })
     .when('/teach', {
-      templateUrl: 'templates/teach.html',
-      controller: 'TeachController',
-      controllerAs: 'teachPage'
+      templateUrl: 'templates/teach.html'
     })
     .otherwise({
       templateUrl: 'templates/index.html'
