@@ -1,6 +1,6 @@
 <html ng-app="ecg">
 <head>
-  <title>ЕКГ</title>
+  <title>Електрокардіографія</title>
 
   <script src="lib/jquery-2.1.1.js"></script>
   <script src="lib/bootstrap.js"></script>
@@ -14,8 +14,9 @@
   <script src="js/controllers/admin.js"></script>
   <script src="js/controllers/quiz.js"></script>
   <script src="js/controllers/page.js"></script>
+  <script src="js/controllers/teach.js"></script>
 
-  <script src="js/directives/input-ecg.js"></script>
+  <script src="js/directives/ecg-showcase.js"></script>
   <script src="js/directives/ecg-simulator.js"></script>
   <script src="js/directives/ecg-preset-editor.js"></script>
 
@@ -32,10 +33,10 @@
   <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body ng-controller="PageController as page" ng-cloak>
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-inverse navbar-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand">Електрокардіограма</a>
+        <a class="navbar-brand">Електрокардіографія</a>
       </div>
 
       <div id="navbar" class="collapse navbar-collapse" ng-if="page.user.isAuthorized">

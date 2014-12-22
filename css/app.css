@@ -2,10 +2,6 @@ html, body {
   background-color: #eee;
 }
 
-body {
-  padding-top: 50px;
-}
-
 canvas {
   margin: 1px 0px;
 }
@@ -13,6 +9,10 @@ canvas {
 ecg-simulator {
   display: inline-block;
   background-color: white;
+}
+
+.center {
+  text-align: center;
 }
 
 .container.signin {
@@ -121,4 +121,23 @@ ecg-simulator {
 .admin-btn:hover, .admin-btn:focus {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.4);
+}
+
+.teach-page {
+  padding-bottom: 15px;
+}
+
+.teach-page .image {
+  text-align: center;
+}
+.teach-page .image > img {
+  max-width: 100%;
+}
+
+.teach-page h4 {
+  margin-left: 10pt;
+}
+
+.teach-page ecg-showcase > canvas {
+  box-shadow: 1px 1px 2px gray;
 }

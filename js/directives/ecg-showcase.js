@@ -2,7 +2,7 @@
 
 angular
 .module('ecg.directives')
-.directive('inputEcg', function(Cardio, Leads) {
+.directive('ecgShowcase', function(Cardio, Leads) {
   function drawHandler($scope) {
     var w = $scope.width,
         h = $scope.height;
@@ -26,10 +26,6 @@ angular
     }.bind(this));
 
     this.beginPath();
-    /*this.moveTo($scope.heart.x, $scope.heart.y);
-    this.lineTo(
-      $scope.heart.x + Cardio.value.x * w / 2,
-      $scope.heart.y + Cardio.value.y * h / 2);*/
 
     this.arc(
       $scope.heart.x + Cardio.value.x * w / 2,
