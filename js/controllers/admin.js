@@ -15,4 +15,8 @@ angular
     var id = self.selectedPreset.id;
     this.selectedPreset = this.presets[id] = clone(this.originalPresets[id]);
   };
+
+  this.getPresetInstance = function(presetName) {
+    return self.presets[presetName];
+  }
 })

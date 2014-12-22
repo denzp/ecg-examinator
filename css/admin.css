@@ -73,3 +73,13 @@ ecg-preset-editor input[type="text"] {
 .admin-questions .preset-viewer canvas {
   background-color: white;
 }
+
+.admin-questions .question-start {
+  border-top: 2px solid rgb(184, 184, 184);
+  margin-top: 10px;
+  padding-top: 5px;
+}
+.admin-questions .question-start:nth-child(2) {
+  border-top-width: 0px;
+  margin-top: 0px;
+}
