@@ -1,0 +1,24 @@
+<h3>Редагування питань</h3>
+
+<div class="row" ng-repeat-start="question in admin.questions">
+  <div class="col-md-3">
+    {{ $index + 1 }} TODO
+  </div>
+  <div class="col-md-9 preset-viewer">
+    <ecg-simulator-dynamic preset="admin.selectedPreset"
+                           width="450">
+    </ecg-simulator-dynamic>
+  </div>
+</div>
+
+<div class="row" ng-repeat-end>
+  <div class="col-md-12">
+    <div class="radio" ng-repeat="answer in question.answers">
+      <label>
+        <input type="radio" name="quest-{{$parent.$index}}"
+               ng-model="answer.correct" ng-value="true">
+        {{ answer.text }}
+      </label>
+    </div>
+  </div>
+</div>

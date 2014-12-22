@@ -3,7 +3,7 @@
 angular
 .module('ecg.services')
 
-.factory('Questions', function() {
+.factory('QuestionStorage', function() {
   // TODO: the questions should be crypted
 
   var questions = [
@@ -110,6 +110,15 @@ angular
     },
   ];
 
+  return {
+    get questions() {
+      return questions;
+    }
+  };
+
+})
+
+.factory('Questions', function(QuestionStorage) {
   function shuffle(array) {
     var i = array.length;
     while(--i) {
@@ -125,7 +134,7 @@ angular
 
   return function getQuestions(count) {
     // shuffle questions and select first random 'count' of them
-    var selectedQuestions = shuffle(questions.slice()).slice(0, count);
+    var selectedQuestions = shuffle(QuestionStorage.questions.slice()).slice(0, count);
 
     // shuffle answers for each question
     selectedQuestions.forEach(function(question) {

@@ -1,0 +1,65 @@
+<h3>Редагування хвороб</h3>
+
+<label>Вибір хвороби</label>
+<div class="row">
+  <div class="col-md-12">
+    <select class="form-control" ng-model="admin.selectedPreset"
+            ng-options="preset.name for (id, preset) in admin.presets | orderBy: preset.name">
+    </select>
+  </div>
+</div>
+
+<form>
+  <div class="clearfix">
+    <div class="pull-right">
+      <button class="btn btn-danger">
+        <span class="glyphicon glyphicon-remove"></span>
+        Видалити
+      </button>
+
+      <button class="btn btn-default btn-warning"
+              ng-click="admin.resetSelectedPreset()">
+        Сбросити
+      </button>
+
+      <button class="btn btn-default">
+        <span class="glyphicon glyphicon-floppy-save"></span>
+        Зберегти як копію
+      </button>
+
+      <button class="btn btn-success">
+        <span class="glyphicon glyphicon-floppy-disk"></span>
+        Зберегти
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8 col-md-9 col-sm-9">
+      <label>Назва хвороби</label>
+      <input type="text" class="form-control" required
+             ng-model="admin.selectedPreset.name">
+    </div>
+    <div class="col-lg-4 col-md-3 col-sm-3">
+      <label>Пульс</label>
+      <input type="text" class="form-control" required ng-pattern="/^\d{2,3}$/"
+             ng-model="admin.selectedPreset.beats">
+    </div>
+  </div>
+
+  <div class="preset-viewer">
+    <ecg-simulator-dynamic preset="admin.selectedPreset"
+                           width="450">
+    </ecg-simulator-dynamic>
+  </div>
+
+  <div class="flex">
+    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-4 wave-descriptor"
+         ng-repeat="descriptor in admin.waveDescriptors">
+      <h4>Зубець <b ng-bind="descriptor.toLocaleUpperCase()"></b></h4>
+
+      <ecg-preset-editor preset="admin.selectedPreset[descriptor]">
+      </ecg-preset-editor>
+    </div>
+  </div>
+</form>
