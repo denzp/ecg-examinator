@@ -12,9 +12,9 @@ angular.module('ecg', [
 ])
 
 .run(function() {
-  /*if(location.href.indexOf('#') >= 0) {
+  if(location.href.indexOf('#') >= 0) {
     location.href = /(.*)#/.exec(location.href)[1];
-  }*/
+  }
 })
 
 .config(function($routeProvider, $locationProvider) {
