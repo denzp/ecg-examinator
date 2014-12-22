@@ -7,9 +7,7 @@ angular
     var w = $scope.width,
         h = $scope.height;
 
-    //this.clearRect(0, 0, $scope.width, $scope.height);
-    this.fillStyle = 'rgba(255, 255, 255, 0.02)';
-    this.fillRect(0, 0, $scope.width, $scope.height);
+    this.clearRect(0, 0, $scope.width, $scope.height);
 
     Leads.forEach(function(lead) {
       this.beginPath();
@@ -27,10 +25,24 @@ angular
 
     this.beginPath();
 
-    this.arc(
-      $scope.heart.x + Cardio.value.x * w / 2,
-      $scope.heart.y + Cardio.value.y * h / 2,
-      0.5, 0, Math.PI * 2);
+    var dX = Cardio.value.x * w / 2,
+        dY = Cardio.value.y * h / 2;
+
+    this.moveTo($scope.heart.x, $scope.heart.y);
+    this.lineTo($scope.heart.x + dX, $scope.heart.y + dY);
+
+    var angle = Math.atan2(dY, dX);
+    var length = 0.25 * Math.sqrt(dX * dX + dY * dY);
+
+    this.lineTo(
+      $scope.heart.x + dX - length * Math.cos(angle - Math.PI / 9),
+      $scope.heart.y + dY - length * Math.sin(angle - Math.PI / 9));
+
+    this.moveTo($scope.heart.x + dX, $scope.heart.y + dY);
+
+    this.lineTo(
+      $scope.heart.x + dX - length * Math.cos(angle + Math.PI / 9),
+      $scope.heart.y + dY - length * Math.sin(angle + Math.PI / 9));
 
     this.strokeStyle = 'black';
     this.lineWidth = 1.5;
@@ -39,7 +51,7 @@ angular
 
   return {
     restrict: 'E',
-    template: '<canvas width={{width}} height={{height}}>',
+    templateUrl: 'templates/directives/ecg-showcase.html',
 
     scope: { },
 
@@ -48,12 +60,12 @@ angular
       $scope.height = 300;
       var ctx = element.find('canvas')[0].getContext('2d');
 
-      $scope.heart = { x: 90, y: 70 };
+      $scope.heart = { x: 150, y: 80 };
 
       window.requestAnimationFrame(function handler() {
         drawHandler.call(ctx, $scope);
         window.requestAnimationFrame(handler);
-      })
+      });
     }
   };
 });

@@ -3,9 +3,9 @@
 angular
 .module('ecg.services')
 .constant('Electrodes', {
-  leftArm:  { x: 0.6,  y: 0.15 },
-  rightArm: { x: -0.2, y: 0.15 },
-  leftLeg:  { x: 0.2,    y: -0.6 },
+  leftArm:  { x: 0.38,  y: 0.18  },
+  rightArm: { x: -0.4,  y: 0.18  },
+  leftLeg:  { x: -0.01, y: -0.65 },
 })
 
 .factory('Leads', function(Electrodes) {

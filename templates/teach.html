@@ -62,30 +62,49 @@
     <div class="col-md-8">
       <h3>Відведення</h3>
 
+      <p>
+        Відведення ЕКГ — проекція <b>вектора Ейнтховена</b>
+        (інтегральний електричний вектор серця) на певну вісь.
+      </p>
+      <p>
+        За наявністю патологічних змін у тому чи іншому відведенні
+        (або у декількох відведеннях) можна зробити висновок.
+      </p>
+
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th colspan="3">Стандартні відведення</th>
+            <th colspan="4">Стандартні відведення</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="center">Відведення</td>
+            <td class="center">Колір</td>
             <td class="center">підключення до "+" полюса гальванометра</td>
             <td class="center">підключення до "-" полюса гальванометра</td>
           </tr>
           <tr>
             <td class="center">I</td>
+            <td class="center">
+              <span class="lead-color" style="background-color: green"></span>
+            </td>
             <td>ліва рука</td>
             <td>права рука</td>
           </tr>
           <tr>
             <td class="center">II</td>
+            <td class="center">
+              <span class="lead-color" style="background-color: red"></span>
+            </td>
             <td>ліва нога</td>
             <td>права рука</td>
           </tr>
           <tr>
             <td class="center">III</td>
+            <td class="center">
+              <span class="lead-color" style="background-color: blue"></span>
+            </td>
             <td>ліва нога</td>
             <td>ліва рука</td>
           </tr>
@@ -95,6 +114,14 @@
 
     <div class="col-md-4 image">
       <ecg-showcase></ecg-showcase>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-4 col-md-4">
+      <a class="btn btn-lg btn-primary btn-block" href="#/quiz">
+        Пройти тест
+      </a>
     </div>
   </div>
 </div>

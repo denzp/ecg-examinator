@@ -5,7 +5,7 @@ angular
 
 .factory('Cardio', function(SplinePoints) {
   var time     = 0,
-      timeStep = 1 / 200,
+      timeStep = 1 / 400,
       spline   = new BSpline(SplinePoints, 2, true),
       x, y;
 
